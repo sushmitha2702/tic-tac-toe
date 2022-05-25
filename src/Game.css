@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+.tile-bg-color {
+  background-color: #e1dddd;
+}
+
+.x-text-color {
+  color: rgb(13, 131, 234);
+}
+
+.o-text-color {
+  color: greenyellow;
+}
+
+.zoom-in-out-box {
+  width: 150px;
+  height: 150px;
+  animation: zoom-in-zoom-out 1s ease 2;
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.1, 1.1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
