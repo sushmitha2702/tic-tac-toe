@@ -3,8 +3,10 @@ import Square from './Square';
 
 class Board extends React.Component {
     renderSquare(i) {
+        console.log("rendering");
         return (
             <Square
+                key= {i}
                 value={this.props.squares[i]}
                 onClick={() => this.props.onClick(i)}
                 currentSelectionIndex={this.props.currentSelectionIndex === i ? this.props.currentSelectionIndex : null}

@@ -15,7 +15,9 @@ class Game extends React.Component {
       xIsNext: true,
       currentSelectionBgColor: 'lightgray',
       currentSelectionIndex: null,
+      winningSet: []
     }
+    this.reset = this.reset.bind(this);
   }
 
   calculateWinner(squares) {
@@ -32,6 +34,9 @@ class Game extends React.Component {
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
+        // this.setState({
+        //   winningSet: lines[i]
+        // }, ()=> {console.log(this.state.winningSet)});
         return squares[a];
       }
     }
@@ -65,6 +70,21 @@ class Game extends React.Component {
     });
   }
 
+  reset() {
+    this.setState({
+      history: [
+        {
+          squares: Array(9).fill(null)
+        }
+      ],
+      stepNumber: 0,
+      xIsNext: true,
+      currentSelectionBgColor: 'lightgray',
+      currentSelectionIndex: null,
+      winningSet: []
+    });
+  }
+
   render() {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
@@ -92,11 +112,19 @@ class Game extends React.Component {
           <Board squares={current.squares} onClick={i => this.handleClick(i)} 
           currentSelectionIndex={this.state.currentSelectionIndex}
           currentSelectionBgColor = {this.state.currentSelectionBgColor}
+          // winningSet= {this.state.winningSet}
           />
         </div>
         <div className='game-info'>
-          <div>{status}</div>
-          <ol>{moves}</ol>
+          {!winner && <div>{status}</div>}
+          {winner && <div> 
+              <h2>{status}</h2>
+              <div>
+                <button onClick={this.reset}>Reset Game</button>
+              </div>
+            </div>
+          }
+          {!winner && <ol>{moves}</ol>}
         </div>
       </div>
     );
